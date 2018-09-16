@@ -37,6 +37,10 @@ class Order < ApplicationRecord
     Settings.project_goal
   end
 
+  def self.percent
+    (Order.revenue.to_f / Order.goal.to_f) * 100.to_f
+  end
+
   def self.backers
     Order.completed.count
   end
