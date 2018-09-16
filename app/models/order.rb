@@ -19,6 +19,27 @@ class Order < ApplicationRecord
     @order
   end
 
+  def self.paypal_checkout(option={})
+    values = {
+      :business => 'daniel_amah@gamil.com',
+      :cmd => '_cart',
+      :upload => 1,
+      :return => option[:return_url],
+      :rm => 2,
+      :invoice => options[:uuid],
+      :notify_url => options[:notify_url]
+    }
+
+    values.merge! ({
+      "amount_1" => options[:price],
+      "item_name_1" => options[:name],
+      "item_number_1" => options[:uuid],
+      "quantity_1" => '1'
+    })
+
+    "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+  end
+
   def self.next_order_number
     if Order.count > 0
       Order.order("number DESC").limit(1).first.number.to_i + 1
