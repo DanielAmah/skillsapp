@@ -19,21 +19,21 @@ class Order < ApplicationRecord
     @order
   end
 
-  def self.paypal_checkout(option={})
+  def self.paypal_checkout!(option={})
     values = {
-      :business => 'daniel_amah@gamil.com',
+      :business => 'dannj@gmail.com',
       :cmd => '_cart',
       :upload => 1,
       :return => option[:return_url],
       :rm => 2,
-      :invoice => options[:uuid],
-      :notify_url => options[:notify_url]
+      :invoice => option[:uuid],
+      :notify_url => option[:notify_url]
     }
 
     values.merge! ({
-      "amount_1" => options[:price],
-      "item_name_1" => options[:name],
-      "item_number_1" => options[:uuid],
+      "amount_1" => option[:price],
+      "item_name_1" => option[:name],
+      "item_number_1" => option[:uuid],
       "quantity_1" => '1'
     })
 

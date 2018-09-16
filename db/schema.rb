@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_16_102148) do
+ActiveRecord::Schema.define(version: 2018_09_16_120136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,11 +43,12 @@ ActiveRecord::Schema.define(version: 2018_09_16_102148) do
 
   create_table "payment_notifications", force: :cascade do |t|
     t.text "params"
-    t.integer "order_id"
     t.string "transaction_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "amount"
+    t.string "status"
+    t.string "order_id"
   end
 
   create_table "payment_options", force: :cascade do |t|
