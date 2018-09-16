@@ -20,7 +20,7 @@ class PreorderController < ApplicationController
     end
 
     @order = Order.prefill!(:name => Settings.product_name, :price => price, :user_id => @user.id, :payment_option => payment_option)
-    redirect_to Order.paypal_checkout!(:name => Settings.product_name, :price=>price, :uuid=> order.uuid, :return_url => preorder_url, :notify_url => payment_notification_index_url)
+    redirect_to Order.paypal_checkout!(:name => Settings.product_name, :price=>price, :uuid=> @order.uuid, :return_url => preorder_url, :notify_url => payment_notifications_url)
   end
 
   def share
