@@ -21,7 +21,7 @@ class Order < ApplicationRecord
 
   def self.paypal_checkout!(option={})
     values = {
-      :business => 'dannj@gmail.com',
+      :business => 'dannj@gmail.com', # test email replace with real business email in production
       :cmd => '_cart',
       :upload => 1,
       :return => option[:return_url],
